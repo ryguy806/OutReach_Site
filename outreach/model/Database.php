@@ -109,17 +109,12 @@ class Database
      * @param $homeless
      * @param $notes
      */
-    function insertGuest($first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $veteran, $homeless, $notes)
+    function insertGuest($first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $senior, $mental, $physical, $veteran, $homeless, $notes)
     {
         //global $dbh;
         //1. Define the query
-        $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, veteran, homeless, notes)
-						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :veteran, :homeless, :notes)";
-
-        /*
-        echo $sql."<br>";
-        echo "$first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license, $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $veteran, $homeless, $notes";
-        */
+        $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, senior, mental, physical, veteran, homeless, notes)
+						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :senior, :mental, :physical, :veteran, :homeless, :notes)";
         
         //2. Prepare the statement
         $statement = $this->dbh->prepare($sql);
@@ -141,6 +136,7 @@ class Database
         $statement->bindParam(':rent', $rent, PDO::PARAM_STR);
         $statement->bindParam(':foodStamp', $foodStamp, PDO::PARAM_STR);
         $statement->bindParam(':addSupport', $addSupport, PDO::PARAM_STR);
+        $statement->bindParam(':senior', $senior, PDO::PARAM_BOOL);
         $statement->bindParam(':mental', $mental, PDO::PARAM_STR);
         $statement->bindParam(':physical', $physical, PDO::PARAM_STR);
         $statement->bindParam(':veteran', $veteran, PDO::PARAM_STR);
@@ -357,13 +353,13 @@ class Database
      */
     function editGuest($id, $first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license,
                        $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $veteran, $homeless, $notes){
-        $sql = "DELETE FROM Guests WHERE ClientID = $id";
+        
+        $sql= "UPDATE Guests SET (first=:first, last=:last, birthdate=:birthdate, phone=:phone, email=:email,
+                ethnicity=:ethnicity, street=:street, city=:city, zip=:zip, license=:liscense, pse=:pse, water=:water,
+                income=:income, rent=:rent, foodStamp=:foodStamp, addSupport=:addSupprt, senior=:senior, mental=:mental,
+                physical=:physical, veteran=:veteran, homeless=:homeless, notes=:notes)";
         $statement = $this->dbh->prepare($sql);
-        $statement->execute();
-        $sql= "INSERT INTO Guests (first, last, birthdate, phone, email, ethnicity, street, city, zip, license, pse, water, income, rent, foodStamp, addSupport, mental, physical, veteran, homeless, notes)
-						VALUES (:first, :last,:birthdate, :phone, :email, :ethnicity, :street, :city, :zip, :license, :pse, :water, :income, :rent, :foodStamp, :addSupport, :mental, :physical, :veteran, :homeless, :notes)";
-        $statement = $this->dbh->prepare($sql);
-        //3. Bind parameters
+
         $statement->bindParam(':first', $first, PDO::PARAM_STR);
         $statement->bindParam(':last', $last, PDO::PARAM_STR);
         $statement->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
@@ -380,6 +376,7 @@ class Database
         $statement->bindParam(':rent', $rent, PDO::PARAM_STR);
         $statement->bindParam(':foodStamp', $foodStamp, PDO::PARAM_STR);
         $statement->bindParam(':addSupport', $addSupport, PDO::PARAM_STR);
+        $statement->bindParam(':senior', $senior, PDO::PARAM_BOOL);
         $statement->bindParam(':mental', $mental, PDO::PARAM_STR);
         $statement->bindParam(':physical', $physical, PDO::PARAM_STR);
         $statement->bindParam(':veteran', $veteran, PDO::PARAM_STR);
