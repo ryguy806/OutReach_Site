@@ -57,7 +57,7 @@ function validRent($rent){
     return empty($rent) || is_numeric($rent);
 }
 
-function validfoodstamps($stamps){
+function validFoodStamps($stamps){
     return empty($stamps) || is_numeric($stamps);
 }
 

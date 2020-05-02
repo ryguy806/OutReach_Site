@@ -284,8 +284,8 @@ $f3->route('GET|POST /newGuest', function($f3)
             $f3->set('invalidRent', "invalid");
         }
         //validate foodstamps
-        if(!validfoodstamps($foodStamp)){
-            $f3->set('invalidFoodstamps', "invalid");
+        if(!validFoodStamps($foodStamp)){
+            $f3->set('invalidFoodStamps', "invalid");
             $isValid = false;
         }
         //validate addsupport
