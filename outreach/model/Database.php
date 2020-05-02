@@ -353,13 +353,14 @@ class Database
      */
     function editGuest($id, $first, $last, $birthdate, $phone, $email, $ethnicity, $street, $city, $zip, $license,
                        $pse, $water, $income, $rent, $foodStamp, $addSupport, $mental, $physical, $veteran, $homeless, $notes){
-        
+
         $sql= "UPDATE Guests SET (first=:first, last=:last, birthdate=:birthdate, phone=:phone, email=:email,
                 ethnicity=:ethnicity, street=:street, city=:city, zip=:zip, license=:liscense, pse=:pse, water=:water,
                 income=:income, rent=:rent, foodStamp=:foodStamp, addSupport=:addSupprt, senior=:senior, mental=:mental,
-                physical=:physical, veteran=:veteran, homeless=:homeless, notes=:notes)";
+                physical=:physical, veteran=:veteran, homeless=:homeless, notes=:notes) WHERE ClientId=:ClientId";
         $statement = $this->dbh->prepare($sql);
 
+        $statement->bindParam(':ClientId', $id, PDO::PARAM_INT);
         $statement->bindParam(':first', $first, PDO::PARAM_STR);
         $statement->bindParam(':last', $last, PDO::PARAM_STR);
         $statement->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
