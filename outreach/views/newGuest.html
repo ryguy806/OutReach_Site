@@ -95,7 +95,7 @@
                         <select class="form-control dropdown" id="ethnicity" name="ethnicity">
                             <option value="">-- select one --</option>
 
-                            <repeat group="{{@ethnicities}}" value="{{@ethnicity1}}">
+                            <repeat group="{{@ethnicity}}" value="{{@ethnicity1}}">
                                 <option <check if="{{ @ethnicity1 == @ethnicity }}">selected</check>  value="{{ @ethnicity1 }}" > {{ @ethnicity1 }}</option>
                             </repeat>
                         </select>
@@ -127,7 +127,17 @@
                         </div>
                     </div>
                 </div> <!-- row -->
-
+                <div class="form-group col-3">
+                    <div class="form-check">
+                        <label class="d-block">Senior:</label>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id='senior' name='senior'
+                            <check if="{{ @senior == 'on' }}">
+                                checked
+                            </check>>
+                        </label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-3">
                         <div class="form-check">
@@ -212,7 +222,7 @@
 
                     <div class="form-group col-3">
                         <label class="form-control-label">Food Stamps:
-                            <check if="{{ isset(@invalidFoodstamps) }}">
+                            <check if="{{ isset(@invalidFoodStamps) }}">
                                 <span class="text-danger font-weight-normal"> - Invalid</span>
                             </check>
                         </label>

@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 
 //Create an instance of the Base Class
 $f3 = Base::instance();
-$f3->set('ethnicities', array('white', 'african american', 'hispanic', 'native', 'asian', 'pacific', 'eskimo','mixed','other' ));
+$f3->set('ethnicity', array('Caucasian', 'African American', 'Hispanic', 'Native', 'Asian', 'Pacific', 'Eskimo','Mixed','Other' ));
 $f3->set('listResources', array('thriftshop','gas','waterbill','energybill','food','dol','other'));
 $f3->set('listGenders', array('male','female','other'));
 
