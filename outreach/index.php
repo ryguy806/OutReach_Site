@@ -250,12 +250,12 @@ $f3->route('GET|POST /newGuest', function($f3)
         $isValid = true;
 
         //validate first Name
-        if(!validFirst($firstName)){
+        if(!validName($firstName)){
             $f3->set('invalidFirstName', "invalid");
             $isValid  = false;
         }
         //validate last name
-        if (!validLast($lastName)) {
+        if (!validName($lastName)) {
             $f3->set('invalidLastName', "invalid");
             $isValid = false;
         }

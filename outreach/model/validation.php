@@ -8,21 +8,13 @@
 
 $regex = "/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/";
 
-function validFirst($name) {
+function validName($name) {
     if(empty($name)){
         return false;
     }
     $valid = preg_match("/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/", $name);
     return $valid;
 //    return ctype_alpha($name);
-}
-
-function validLast($name) {
-    if(empty($name)){
-        return false;
-    }
-    $valid = preg_match("/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/", $name);
-    return $valid;
 }
 
 function validBirth($date) {
